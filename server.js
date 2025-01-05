@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const UserRoute = require("./src/routes/UserRoute");
+require("dotenv").config();
 const app = express();
 const jwt = require("jsonwebtoken");
-const { ConnectDB } = require("./src/config/db");
+const ConnectDB = require("./src/config/db");
 const PORT = process.env.SERVER_PORT || 5000;
 // middlerware
 app.use(express.json());
@@ -28,3 +30,5 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
+
+app.use("/", UserRoute);
