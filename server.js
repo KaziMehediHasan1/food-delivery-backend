@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 const app = express();
 const ConnectDB = require("./src/config/db");
 const UserRoute = require("./src/routes/UserRoute");
+const ShopCreatorRoute = require("./src/routes/ShopCreatorRoute");
+const ShopProductRoute = require("./src/routes/ShopProductRoute");
+const reastaurantRoute = require("./src/routes/restaurantRoute");
+const foodRoute = require("./src/routes/foodRoute");
 const PORT = process.env.SERVER_PORT || 5000;
 // middlerware
 app.use(express.json());
@@ -34,5 +38,8 @@ app.listen(PORT, () => {
 });
 
 app.use("/", UserRoute);
-
+app.use("/", ShopCreatorRoute);
+app.use("/", ShopProductRoute);
+app.use("/", reastaurantRoute);
+app.use("/", foodRoute);
 module.exports = app;
