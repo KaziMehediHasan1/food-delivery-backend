@@ -20,10 +20,24 @@ const createFood = async (req, res) => {
     console.log(existingName, "18 no line");
 
     if (!existingName) {
-      return res.status(404).json({ message: "Not found your restaurant" });
+      return res.status(404).json({ message: "Not found your restaurant, please create first!" });
     }
 
-    
+    if (existingName) {
+      const createFoods = new foodSchema({
+        resName,
+        foodName,
+        foodPhoto,
+        foodPrice,
+        foodWeight,
+        foodTags,
+        foodIngrediants,
+        foodDescriptions,
+      });
+      const savedFoods = await createFoods.save();
+      // console.log(savedFoods, "30 no line");
+      res.status(200).json({ ...savedFoods });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
