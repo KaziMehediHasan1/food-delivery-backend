@@ -1,19 +1,21 @@
 const express = require("express");
 const cors = require("cors");
-const UserRoute = require("./src/routes/UserRoute");
 require("dotenv").config();
+const bodyParser = require("body-parser");
 const app = express();
-const jwt = require("jsonwebtoken");
 const ConnectDB = require("./src/config/db");
+const UserRoute = require("./src/routes/UserRoute");
 const PORT = process.env.SERVER_PORT || 5000;
 // middlerware
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 // database connected
 ConnectDB();
 
 // sign jwt
 app.use("/jwt", async (req, res) => {
+  res.cookie("name", "mehedi");
   const user = req.body;
   const token = jwt.sign(user, process.env.JWT_SECRET_TOKEN, {
     expiresIn: "1h",
@@ -32,3 +34,5 @@ app.listen(PORT, () => {
 });
 
 app.use("/", UserRoute);
+
+module.exports = app;
