@@ -14,12 +14,20 @@ const createUser = async (req, res) => {
   }
 };
 
+// get alluser for showing navbar and dashboard
+const getAllUsers = async (req, res) => {
+  try {
+    const getAllUser = await UserSchema.find();
+    res.status(200).json(getAllUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // get/read users..
 const getUsers = async (req, res) => {
   try {
     const { email, hashedPass } = req.query;
-    console.log(email, hashedPass);
-    // const password = await bcrypt.compare()
     const findUsers = await UserSchema.findOne({ email });
     const compPass = await bcrypt.compare(hashedPass, findUsers?.hashedPass);
     if (!compPass) {
@@ -31,7 +39,7 @@ const getUsers = async (req, res) => {
       process.env.JWT_SCREAT_KEY,
       { expiresIn: "1" }
     );
-    res.status(200).json({findUsers, token});
+    res.status(200).json({ findUsers, token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -40,4 +48,5 @@ const getUsers = async (req, res) => {
 module.exports = {
   createUser,
   getUsers,
+  getAllUsers,
 };
