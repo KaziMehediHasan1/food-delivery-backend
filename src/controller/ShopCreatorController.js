@@ -3,7 +3,8 @@ const ShopCreator = require("../model/ShopCreatorSchema");
 const createShop = async (req, res) => {
   try {
     const shopdata = req.body;
-    const createShops = new ShopCreator(shopdata);
+    console.log(shopdata, "6 no line");
+    const createShops = new ShopCreator({ ...shopdata });
     const savedShop = await createShops.save();
     if (!savedShop) {
       return res.status(401).json({ message: "shop is not creating" });
@@ -23,7 +24,6 @@ const getShop = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 
 module.exports = {
   createShop,

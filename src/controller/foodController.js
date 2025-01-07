@@ -2,6 +2,7 @@ const foodSchema = require("../model/foodSchema");
 const restaurantCreatorSchema = require("../model/restaurantCreatorSchema");
 
 const createFood = async (req, res) => {
+  console.log(req.body, "5no line");
   try {
     const {
       resName,
@@ -20,24 +21,25 @@ const createFood = async (req, res) => {
     console.log(existingName, "18 no line");
 
     if (!existingName) {
-      return res.status(404).json({ message: "Not found your restaurant, please create first!" });
+      return res
+        .status(404)
+        .json({ message: "Not found your restaurant, please create first!" });
     }
 
-    if (existingName) {
-      const createFoods = new foodSchema({
-        resName,
-        foodName,
-        foodPhoto,
-        foodPrice,
-        foodWeight,
-        foodTags,
-        foodIngrediants,
-        foodDescriptions,
-      });
-      const savedFoods = await createFoods.save();
-      // console.log(savedFoods, "30 no line");
-      res.status(200).json({ ...savedFoods });
-    }
+    const createFoods = new foodSchema({
+      resName,
+      foodName,
+      foodPhoto,
+      foodPrice,
+      foodWeight,
+      foodTags,
+      foodIngrediants,
+      foodDescriptions,
+    });
+    const savedFoods = await createFoods.save();
+
+    console.log(savedFoods, "41 no line");
+    res.status(200).json(savedFoods);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

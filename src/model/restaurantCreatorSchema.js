@@ -11,7 +11,6 @@ const restaurantCreator = new mongoose.Schema({
   },
   resLogo: {
     type: String,
-    required: true,
   },
   resDeliveryTime: {
     type: String,

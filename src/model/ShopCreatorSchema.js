@@ -1,4 +1,4 @@
-const  mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 
 const ShopCreatorSchema = new mongoose.Schema({
   shopName: {
@@ -11,7 +11,6 @@ const ShopCreatorSchema = new mongoose.Schema({
   },
   shopLogo: {
     type: String,
-    required: true,
   },
   shopLocation: {
     type: String,
