@@ -13,7 +13,7 @@ const shopProducts = new mongoose.Schema({
     type: Number,
   },
   proOffer: {
-    type: String,
+    type: Number,
   },
   proName: {
     type: String,
@@ -39,7 +39,7 @@ const shopProducts = new mongoose.Schema({
     type: [String],
     required: true,
   },
-  
+
   proratting: {
     type: [String],
   },

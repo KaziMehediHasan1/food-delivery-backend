@@ -9,6 +9,10 @@ const restaurantCreator = new mongoose.Schema({
     type: String,
     required: true,
   },
+  resLocation: {
+    type: String,
+    required: true,
+  },
   resLogo: {
     type: String,
   },

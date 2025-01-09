@@ -21,6 +21,14 @@ const foodSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  foodType: {
+    type: String,
+    required: true,
+  },
+  foodOffer: {
+    type: Number,
+    required: true,
+  },
   foodTags: {
     type: [String],
     required: true,

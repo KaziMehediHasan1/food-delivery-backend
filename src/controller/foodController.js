@@ -13,6 +13,8 @@ const createFood = async (req, res) => {
       foodTags,
       foodIngrediants,
       foodDescriptions,
+      foodOffer,
+      foodType,
     } = req.body;
 
     const existingName = await restaurantCreatorSchema.findOne({
@@ -35,10 +37,10 @@ const createFood = async (req, res) => {
       foodTags,
       foodIngrediants,
       foodDescriptions,
+      foodOffer,
+      foodType,
     });
     const savedFoods = await createFoods.save();
-
-    console.log(savedFoods, "41 no line");
     res.status(200).json(savedFoods);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -55,7 +57,20 @@ const getFoods = async (req, res) => {
   }
 };
 
+// deleted product
+const deleteFood = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleted = await foodSchema.findOneAndDelete({ _id: id });
+    res.status(200).json(deleted);
+  } catch (error) {
+    res.status(500).json({ message: message.error });
+  }
+};
+
 module.exports = {
   createFood,
   getFoods,
+  deleteFood,
 };

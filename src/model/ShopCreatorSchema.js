@@ -9,6 +9,10 @@ const ShopCreatorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  shopType: {
+    type: String,
+    required: true,
+  },
   shopLogo: {
     type: String,
   },
