@@ -9,7 +9,7 @@ const route = express.Router();
 
 route.post("/createfood", createFood);
 route.get("/getfoods", getFoods);
-route.get("/getSearch/:search", getSearchFoods);
+route.get("/getSearch/:query", getSearchFoods);
 route.delete("/deletefood/:id", deleteFood);
 
 module.exports = route;
