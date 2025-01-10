@@ -57,6 +57,23 @@ const getFoods = async (req, res) => {
   }
 };
 
+// get search foods  data
+const getSearchFoods = async (req, res) => {
+  try {
+    const { search } = req.params;
+    console.log(search, "64no line");
+    const result = await foodSchema.find({
+      $or: [
+        { foodName: { $regex: search, $options: "i" } },
+        { resName: { $regex: search, $options: "i" } },
+      ],
+    });
+
+    res.status(200).json(result);
+  } catch (error) { 
+    res.status(500).json({ message: error.message });
+  }
+};
 // deleted product
 const deleteFood = async (req, res) => {
   try {
@@ -73,4 +90,5 @@ module.exports = {
   createFood,
   getFoods,
   deleteFood,
+  getSearchFoods,
 };
